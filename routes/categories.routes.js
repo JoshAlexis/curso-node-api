@@ -34,7 +34,7 @@ router.post('/',
   validatorHandler(createCategorySchema, 'body'),
   async (req, res, next) => {
     try {
-      const { body } = req.body;
+      const body = req.body;
       const newCategory = await service.create(body);
       res.status(201).json(newCategory);
     } catch (error) {
@@ -48,7 +48,7 @@ router.patch('/:id',
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const { body } = req.body;
+      const body = req.body;
       const category = await service.update(id, body);
       res.json(category)
     } catch (error) {
