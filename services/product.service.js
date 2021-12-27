@@ -1,6 +1,3 @@
-const faker = require("faker");
-const boom = require('@hapi/boom');
-
 const sequelize = require('../libs/sequelize');
 const { models } = sequelize;
 const { Product } = models;
@@ -13,10 +10,13 @@ class ProductService {
     return newProduct;
   }
 
-  async find() {
-    const products = await Product.findAll({
-      include: ['category']
-    })
+  async find({ offset, limit }) {
+    const options = {
+      include: ['category'],
+      limit: parseInt(limit),
+      offset: parseInt(offset)
+    }
+    const products = await Product.findAll(options)
     return products;
   }
 
